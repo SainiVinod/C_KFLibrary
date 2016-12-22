@@ -216,9 +216,9 @@ void MatTrans2by2(const float **matA, float **matB){
 
 void MatInv2by2(const float **matA, float **matB){
 
-	float det = MatDet2by2(matA);
+	float det_inv = 1.0/ MatDet2by2(matA);
 
-	MatScalarMult(matA, 2, 2, 1.0/det, matB);
+	MatScalarMult(matA, 2, 2, det_inv, matB);
 
 	matB[0][1] = -matB[0][1];
 
@@ -238,9 +238,10 @@ void MatScalarMult(const float **matA, const unsigned int row, const unsigned in
 
 			matB[itr_row][itr_col] = matA[itr_row][itr_col]*scalar; 
 
-			}
-
 		}
+
+	}
+
 }
 
 
@@ -255,17 +256,55 @@ void MatrixSum(const float **ipMat1, const float **ipMat2, const int8_t row, con
 }
 
 
-/* Quat to Rotation */
-void Quat2Rot(const float *quat){
-  float rotMat[3][3];
-  
+/*_______________ Quat to Rotation_______________________________ */
+float** Quat2Rot(const float *quat){
+	float rotMat[3][3];
+	rotMat[0][0] = quat[0]^2 - quat[1]^2 - quat[2]^2 + quat[3]^2 ; 
+	rotMat[0][1] = 2*(quat[0]*quat[1] + quat[2]*quat[3]);  
+	rotMat[0][2] = 2*(quat[0]*quat[2] - quat[1]*quat[3]);  
+ 
+	rotMat[1][0] = 2*(quat[1]*quat[0] - quat[2]*quat[3]);   
+	rotMat[1][1] = -quat[0]^2 + quat[1]^2 - quat[2]^2 + quat[3]^2 ; 
+	rotMat[1][2] = 2*(quat[1]*quat[2] + quat[0]*quat[3]);   
+
+	rotMat[2][0] = 2*(quat[2]*quat[0] + quat[1]*quat[3]);   
+	rotMat[2][1] = 2*(quat[2]*quat[1] - quat[0]*quat[3]);   
+	rotMat[2][2] = -quat[0]^2 - quat[1]^2 + quat[2]^2 + quat[3]^2 ;
+
+  	return rotMat; 
 
 }
 
 
-/* Rotation to Euler Angles*/
+/*________________ Rotation to Euler Angles_____________________*/
 float* Rot2Euler(const float **rotMat){
+	float eulerAngles[3];
+	
+	float sinth; = -rotMat[2][0];
+	if (sinth > 1) {
+		sth = 1;
+	} 
+	else if (sinth < -1) {
+		sth = -1;
+	}
 
+	float theta = asin(sinth);
+	float costh = sqrt(1 - sinth * sinth);
+
+	float phi, psi;
+
+	if (costh < 1.0e-6){
+		phi = atan2(rotMat[0][1], rotMat[1][1]);
+		psi = 0;
+	} 
+	else {
+		phi = atan2(rotMat[2][1], rotMat[2][2]);
+   		psi = atan2(rotMat[1][0], rotMat[0][0]);
+	}
+	
+	eulerAngles[0] = phi; 	// [-pi, pi]
+	eulerAngles[1] = theta; // [-pi/2, pi/2]
+	eulerAngles[2] = psi; 	// [-pi/2, pi/2]
 }
 
 
