@@ -10,6 +10,7 @@ void print(float *arr, int m, int n)
 
 }
 
+
 /* Matrix Multiplication */
 void MatMultiplication(const float *matA, const unsigned int sizeA[], const float *matB, const unsigned int sizeB[], float *matC){
 	unsigned int i1, j1, j2;
