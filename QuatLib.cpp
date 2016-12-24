@@ -54,13 +54,17 @@ float* Rot2Euler(const float **rotMat){
 /*Quaternion Multiplication */
 void QuatMultiply(const float ipVec1, const float ipVec2, float *opVec){
   opVec[0] = ipVec1[0]*ipVec2[0] - ipVec1[1]*ipVec2[1] - ipVec1[2]*ipVec2[2] - ipVec1[3]*ipVec2[3];
-  opVec[1] = ipVec1[0]*ipVec2[1] + ipVec2[0]*ipVec1[1] + ipVec1[2]*ipVec2[3] - ipVec2[2]*ipVec1[3];
+ 
+ opVec[1] = ipVec1[0]*ipVec2[1] + ipVec2[0]*ipVec1[1] + ipVec1[2]*ipVec2[3] - ipVec2[2]*ipVec1[3];
+
   opVec[2] = ipVec1[0]*ipVec2[2] + ipVec2[0]*ipVec1[2] - ipVec1[1]*ipVec2[3] + ipVec2[1]*ipVec1[3];
+
   opVec[3] = ipVec1[0]*ipVec2[3] + ipVec2[0]*ipVec1[3] + ipVec1[1]*ipVec2[2] - ipVec2[1]*ipVec1[2];
+
 }
 
 /* Euler Integration Quaternion */
-void IntegrateEuler(
+void IntegrateEuler(t
 void KFpredict(float *gyroScope){
   float identityMat[3][3] = {{1,0,0},{0,1,0},{0,0,1}};
   

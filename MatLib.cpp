@@ -1,9 +1,7 @@
-/***********************************************************************************************
-
+/****************************************************************************
 * 								Drona Aviation
 
-***********************************************************************************************/
-
+*****************************************************************************/
 
 
 #include <stdint.h>
@@ -40,7 +38,18 @@ void MatMul3by3(const float **matA, const float **matB, float **matC){
 
 }
 
-
+/* Matrix Multiplication */
+MatMultiplication(const float *matA, const unsigned int *sizeA, const float *matB, const unsigned int *sizeB, float *matC){
+	for (unsigned int i1 = 0 ; i1< sizeA[0]; i1++){
+		for (unsigned int j2 = 0; j2 < sizeB[1]; j2++){
+			for (unsigned int j1 = 0; j1 < sizeA[1] ; j1++){
+				for (unsigned int i2 = 0 ; i2 < sizeB[0] ; i2++){
+					matC[i1][j2] += matA[i1][j1]*matB[i2][j2];
+				}
+			}			
+		}
+	}
+}
 
 /* Determinant of mat A */
 
@@ -200,7 +209,6 @@ void MatAdd2by2(const float **matA, const float **matB, float **matC){
 
 void MatTrans2by2(const float **matA, float **matB){
 
-	matB[0][0] = matA[0][0];
 
 	matB[0][1] = matA[1][0];
 

@@ -4,6 +4,8 @@
 
 ********************************************************************************
 
+/* Mat Multiplication */
+void MatMultiplication(const float *matA, const unsigned int *sizeA, const float *matB, const unsigned int *sizeB, float *matC)
 
 /* 3 X 3 matrix mutiplication, mat A and B as inputs and C = A X B */
 
