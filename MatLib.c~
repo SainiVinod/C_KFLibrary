@@ -90,8 +90,6 @@ void MatInv3by3(const float *matA, float *matB){
 }
 
 
-
-
 /* 2 X 2 matrix determinant */
 
 float MatDet2by2(const float *matA) {
@@ -101,14 +99,17 @@ float MatDet2by2(const float *matA) {
 }
 
 
+
 /* 2X2 matrix inverse */
 
 void MatInv2by2(const float *matA, float *matB){
 
 	float det_inv = 1.0/ MatDet2by2((float *)matA);
+  unsigned int sizeA = {2,1};
+	MatScalarMult((float *)matA, sizeA, det_inv, (float *)matB);
 
-	MatScalarMult(matA, 2, 2, det_inv, matB);
-
+  (*((matB) + 1)) = (*((matA) + 1));
+	(*((matB+2)))   = (*((matB+2*3) + 2))
 	matB[0][1] = -matB[0][1];
 
 	matB[1][0] = -matB[1][0]; 

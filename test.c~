@@ -1,3 +1,6 @@
+#include <stdio.h>
+#include <math.h>
+
 /* print array */
 void print(float *arr, int m, int n)
 {
@@ -153,4 +156,75 @@ crossSkew(const float *matA, float *matB){
   (*(matB+7)) = (*(matA));
   (*(matB+8)) = 0;
 
+}
+ 
+int main()
+{
+    float arr1[3][3]  = {{1, 2, 3}, {1, 2, 3}, {1, 2, 3}};
+    float arr2[3][3]  = {{2, 0, 0}, {0, 2, 0}, {0, 0, 2}};
+    float multiCheck[3][3]   = {{0}};
+    float additionCheck[3][3];
+    float transposeCheck[3][3];
+    float normCheck[3][3];
+    float matInverse[3][3];
+    unsigned int sizearr1[2] = {3,3};
+    unsigned int sizearr2[2] = {3,3};
+    printf("Matrix A \n");
+    print((float *)arr1, 3, 3);
+    printf("Matrix B \n");
+    print((float *)arr2, 3, 3);
+    MatMultiplication( (float *)arr1, sizearr1, (float *)arr2, sizearr2, (float *)multiCheck);
+    printf("Matrix A*B \n");
+    print((float *)multiCheck, 3, 3);
+    
+    float det = MatDet3by3((float *)multiCheck);
+    printf("Determinant of Matrix A*B %f \n", det);
+    
+    MatAddition( (float *)arr1, sizearr1, (float *)arr2, (float *)additionCheck);
+    printf("Addition of Matrix A and B \n");
+    print((float *)additionCheck, 3, 3);
+    
+    MatTranspose((float *)arr1, sizearr1, (float *)transposeCheck); 
+    printf("Transpose of Matrix A \n");
+    print((float *)transposeCheck, 3, 3);  
+    
+    MatInv3by3((float *)arr2, (float *)matInverse);
+    printf("Inverse of Matrix B \n");
+    print((float *)matInverse, 3, 3);  
+    
+    
+    float arr3[2][2] 	=	{{2,3},{4,2}};
+    float invMat2by2[2][2];
+    printf("Matrix C is \n");
+    print((float *)arr3, 2, 2);
+    printf("Determinant of Matrix C is %f \n", MatDet2by2((float *) arr3));
+    MatInv2by2((float *) arr3, (float *) invMat2by2);
+    printf("Inverse of Matrix C \n");
+    print((float *)invMat2by2, 2, 2);
+    
+    float scalarMulti[3][3];
+    float scalar = 2.0;
+    MatScalarMult((float *)arr1, sizearr1, scalar, (float *)scalarMulti);
+    printf("Scalar Multiplication of %f and Matrix A is \n" , scalar);
+    print((float *)scalarMulti, 3, 3);
+    
+    
+    printf("Normalized Matrix B is \n");
+    NormMatrix((float *)arr2, sizearr2, (float *) normCheck);
+    print((float *)normCheck, 3, 3);
+    
+    float omegaVec[3][1] = {{1},{2},{3}};
+    float omegaVecT[1][3] = {{1 , 2, 3}};
+    
+    float omegaSkew[3][3];
+    
+    print((float *)omegaVec, 3, 1);
+    print((float *)omegaVecT, 1, 3);
+    crossSkew((float *) omegaVec, (float *) omegaSkew);
+    print((float *)omegaSkew, 3, 3);
+    crossSkew((float *) omegaVecT, (float *) omegaSkew);
+    print((float *)omegaSkew, 3, 3);
+    
+    
+    return 0;
 }
