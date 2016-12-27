@@ -229,6 +229,19 @@ int main()
     printf("SkewMatrix \n");
     print((float *)omegaSkew, 3, 3);
     
+    float rotMat[3][3]  = {{1,0,0},{0,1,0},{0,0,1}};
+    float accVec[3]     = {1,2,3};   
+    unsigned int sizerotMat[2] = {3,3};
+    unsigned int sizeaccVec[2] = {3,1};
+    float op[3][1];
+    MatMultiplication( (float *)rotMat, sizerotMat, (float *)accVec, sizeaccVec, (float *)op);
+    printf("Rotation Matrix \n");
+    print((float *) rotMat, 3, 3);
+    printf("Vector \n");
+    print((float *) accVec, 1, 3); 
+    printf("Matrix Array Multiplcation \n");
+    print((float *)op, 3,1);    
     
+    getchar();
     return 0;
 }
