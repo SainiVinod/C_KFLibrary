@@ -1,6 +1,5 @@
 #ifndef MATLIB_H
 #define MATLIB_H
-
 /* print array */
 void print(float *arr, int m, int n)
 
@@ -33,5 +32,4 @@ void NormMatrix(const float *matA, const unsigned int sizeA[], float *matB)
 
 /*Calculate Cross Skew Matrix */
 crossSkew(const float *matA, float *matB)
-
 #endif 

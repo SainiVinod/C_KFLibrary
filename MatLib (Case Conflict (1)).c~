@@ -1,3 +1,6 @@
+#include <stdio.h>
+#include <math.h>
+
 /* print array */
 void print(float *arr, int m, int n)
 {
@@ -121,8 +124,7 @@ void MatInv2by2(const float *matA, float *matB){
 
 }
 
-/*Normalize Vector */
-void NormMatrix(const float *matA, const unsigned int sizeA[], float *matB){
+float NormofMatrix(const float *matA, const unsigned int sizeA[]){
   float sum = 0.0;
   unsigned int i, j;
   for (i = 0; i < sizeA[0]; i++){
@@ -131,10 +133,16 @@ void NormMatrix(const float *matA, const unsigned int sizeA[], float *matB){
     }
   }   
   sum = pow(sum,0.5);
+  return sum; 
+}
+
+/*Normalize Vector */
+void NormMatrix(const float *matA, const unsigned int sizeA[], float *matB){
+  float norm =  NormofMatrix
 
   for (i = 0; i < sizeA[0]; i++){
   	for (j = 0; j < sizeA[1]; j++){
-    	(*((matB+ i*sizeA[1]) + j)) = (*((matA+ i*sizeA[1]) + j))/sum;
+    	(*((matB+ i*sizeA[1]) + j)) = (*((matA+ i*sizeA[1]) + j))/norm;
     }
   } 
 }
