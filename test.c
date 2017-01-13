@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <math.h>
 #include "matlib.h"
+#include "quatlib.h"
 
 void MatLibtest(void){
 		printf("Matrix Library Test \n");
@@ -103,8 +104,33 @@ void MatLibtest(void){
 }
 
 void QuatLibtest(void){
-	 	int i = 1;
 	 	printf("Quat Library Test \n");
+	 	
+	 	printf("Quat2Rot Test:\n");
+		//to do: write test functions
+
+		printf("Rot2Euler Test:\n");
+		//to do: write test functions
+		float rotMat[3][3] = {{1.0, 0.0, 0.0}, {0.0, 1.0, 0.0}, {0.0, 0.0, 1.0}};
+		float eulerAngles[3];
+		Rot2Euler((float*) rotMat, (float*) eulerAngles);
+		printf("Rotation Matrix is \n");
+		print((float *)rotMat, 3, 3);
+		printf("Euler Angles are: \n");
+		print((float *)eulerAngles, 3, 1);
+				
+		printf("QuatMultiply Test:\n");
+		//to do: write test functions	 	
+		
+		printf("Euler2Quat Test:\n");
+		//to do: write test functions
+		
+	 	printf("Rodrigues Test:\n");
+		//to do: write test functions
+
+	 	printf("IntegrateEuler Test:\n");
+		//to do: write test functions
+
 }
 
 void Array2DTest(float *arr){

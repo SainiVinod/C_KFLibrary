@@ -20,12 +20,12 @@ void Quat2Rot(const float *quat, float *rotMat){
 
 /*_______________________ Rotation to Euler Angles________________________*/
 void Rot2Euler(const float *rotMat, float *eulerAngles){
-	float sinth = -(*(rotMat+6));
+	float sinth; = -(*(rotMat+6));
 	if (sinth > 1) {
-		sinth = 1;
+		sth = 1;
 	} 
 	else if (sinth < -1) {
-		sinth = -1;
+		sth = -1;
 	}
 
 	float theta = asin(sinth);

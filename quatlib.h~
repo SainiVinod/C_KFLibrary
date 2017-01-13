@@ -17,5 +17,17 @@ void Euler2Quat(const float angle[], float *quat);
 void Rodrigues(const float *rodrigus, float *quat);
 
 /*________________ Euler Integration Quaternion____________________________ */
-void IntegrateEuler(const float *quat_prv, const float *omega, const float dt, float *quat_updated);
+IntegrateEuler(void);
+
+
+/* Euler Integration Quaternion */
+void IntegrateEuler(const float *quat_prv, const float *omega, const float dt, float *quat_updated){
+	float omega_quat[4][1] = {{0.0}, {*(omega)}, {*(omega+1)}, {*(omega+2)}};
+  QuatMultiply((float *) quat_prv, (float *) omega_quat, (float *) quat_updated);
+  *(quat_updated)   = *(quat_prv) + 0.5 * dt * (*(quat_updated));
+  *(quat_updated+1) = *(quat_prv+1)+ 0.5 * dt * (*(quat_updated+1));
+  *(quat_updated+2) = *(quat_prv+2)+ 0.5 * dt * (*(quat_updated+2));
+  *(quat_updated+3) = *(quat_prv+3)+ 0.5 * dt * (*(quat_updated+3));
+
+}
 #endif
