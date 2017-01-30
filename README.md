@@ -1,2 +1,1 @@
-KF and Matrix Library in C
-Exp 1
+Matrix and Quaternion Library in C
